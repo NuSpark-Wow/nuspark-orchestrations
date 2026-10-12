@@ -201,10 +201,7 @@ const SOL = [
  ["NuSpark TVMediaBuy","https://nusparkmarketing.com/television-media-buying-2/","c","Broadcast, cable, CTV, OTT and YouTube media buying"],
  ["NuSpark TV-Results","https://nusparkmarketing.com/television-lead-generation/","c","TV lead generation: QR codes by segment, SMS opt-in, guide offers, response tracking"],
  ["NuSpark RadioLeadGen","https://nusparkmarketing.com/radio-lead-generation/","c","Radio and audio campaigns built for consumer response"],
- ["NuSpark TextEngage","","c","SMS/MMS campaigns, list growth and automated text workflows (SlickText)"],
- ["NuSpark Engage360","https://nusparkmarketing.com/loyalty-solutions-for-b2c/","c","Loyalty, promotions, coupons, referrals and retention (Voucherify)"],
- ["NuSpark Reputation","","c","Reviews, review generation, responses and listings across locations (Birdeye)"],
- ["NuSpark Testimonial Trust","","x","Captures and publishes customer testimonials and social proof (Senja)"],
+ ["NuSpark Engage360","https://nusparkmarketing.com/b2c-customer-aquistion-programs/","c","Umbrella B2C customer engagement system: text message workflows, mobile coupons and promo codes (SlickText), loyalty, referrals and retention (Voucherify), reviews and reputation (Birdeye), testimonial gathering (Senja)"],
  ["NuSpark LeadFlow","https://nusparkmarketing.com/small-biz-crm-outreach-combo-tool/","b","All-in-one CRM and outreach platform (GoHighLevel)"],
  ["NuSpark Persuader","https://nusparkmarketing.com/website-lead-capture-program/","x","Website messaging, trust, offers and conversion paths"],
  ["NuSpark Custom Lander","https://nusparkmarketing.com/ai-signal-custom-landing-pages/","x","Audience- and offer-specific landing pages"],
@@ -216,18 +213,20 @@ const SOL = [
 
 const PARTNER = {
  "NuSpark Cold Optimizer":"Maildoso","NuSpark Company Trigger-Signals":"Fundz","NuSpark CRO-Plus":"Pathmonk",
- "NuSpark Email-Verify":"Emailable","NuSpark Engage360":"Voucherify","NuSpark Enrich":"Findymail",
+ "NuSpark Email-Verify":"Emailable","NuSpark Enrich":"Findymail",
  "NuSpark HumanSDR":"Amy Opens Doors LLC","NuSpark Intent":"LeadOnion","NuSpark LinkedIn Signals":"Expandi",
  "NuSpark RevAnalyzer":"SegMetrics","NuSpark SaaS Retain":"Custify","NuSpark SaaS SalesPlus":"Mastiff Software",
- "NuSpark SalesEngage":"Apollo","NuSpark Testimonial Trust":"Senja","NuSpark TradeShowLead+":"Mobly",
+ "NuSpark SalesEngage":"Apollo","NuSpark TradeShowLead+":"Mobly",
  "NuSpark Video-Trust":"Dubb","NuSpark VisitorID":"Leadfeeder","NuSpark Webinar Trust":"BigMarker",
- "NuSpark Reputation":"Birdeye","NuSpark TextEngage":"SlickText","NuSpark LeadFlow":"GoHighLevel",
+"NuSpark LeadFlow":"GoHighLevel",
  "NuSpark LeadScore":"Mastiff Software","NuSpark NativeAd":"Dianomi"
 };
-function solNode(name,url){
+const E360 = ["SlickText","Voucherify","Birdeye","Senja"];
+function solNode(name,url,platform){
   const wrap=el("span","solwrap");
   if(url){ const a=el("a","sol",name); a.href=url; a.target="_blank"; a.rel="noopener"; wrap.append(a);} else wrap.append(el("span","sol",name));
-  if(PARTNER[name]) wrap.append(el("span","partner"," with "+PARTNER[name]));
+  const pt = (name==="NuSpark Engage360" && E360.includes(platform)) ? platform : PARTNER[name];
+  if(pt) wrap.append(el("span","partner"," with "+pt));
   return wrap;
 }
 const SHARED_TOOLS = "Agenda Architect; AI Marketing Meeting; AI Sales Meeting; Brand Positioning Pro; Buyer Persona Builder; Customer Journey Guide; Feature-Benefit-Outcome Matrix; Go-To-Market Strategy Planner; HighLevel Help Aid; iPaaS Workflow Automation Pro; Market Trend Buddy; My Fractional CMO; NuSpark Workflow Advisor; Pain Point Message Guide; Problem-Solution Guide; Target Pain Point Guide; Upside Down Funnel Plan; USP Refiner; Value Prop Guide; Who Needs You and Why?; Who's My Target; Ad Copy Wizard; Ad Evaluator; Ad Script Wizard; Banner Ad Writer; Chat GPT  Ads Copy Builder; Creative Ad Studio; Digital Ad Crafter; Digital Lead Gen Copy Helper; Make Me Click-Convert; Master Ad Specs; Media Tactic Analyst; My AI Creative Director; Native Ad Copywriter; Offer/Sale Builder Pro; Promo Assistant; Social Ad Teaser; U Tube Video scripter; UTM Builder; You Video Tube-  Don't Skip- Teasers; ChatBot Scripter; Educate Your Audience; eNewsletter Curator; Free Mini Guide Creator; Humanize and Personalize; Message Strategy Guru; Storytelling Copy Enhancer; Text Message Marketer; Voiceover Scripter; VSL Script Master; CRM Follow-up Messenger; Custom Email Pro; eBlast Email Crafter; Email Anti-Spam Rewrite; Email Funnel Topic Planner; Email Marketing Guru; Email Subject Line Styler; Follow-Up Email Series; Improve InBox Delivery; Info Guide Email Writer; Lead Funnel Architect; Nurture Email Copy Wizard; Open My Nurture Email; Personal and Passionate Outreacher; Proof Message Wizard; Sales Follow-Up Genius; Sales Message Architect; Subject Line Wizard; Teaser Genius; Welcoming Email Assistant; eBook Ghoster; eBook Outline Planner; Educational Guide Planner; Info Guide Landing Page Builder; Info Guide Planner; Info Guide Writer; Lead Gen Guide Preview; Lead Magnet Ad Crafter; Lead Magnet Ad Headline Guide; Lead Magnet eBlast Crafter; Lead Magnet Lander Pro; Lead Magnet PPC Planner; Lead Magnet Type & Topic Planner; Lead Magnet/Guide/eBook-Conversion Calculator; Topic to Follow-up Guide Planner; Webinar Topic Planner; Paid Search eBook Lead Planner; Paid Search Strategy Pro; Paid Search-Lead Magnet Ace; PPC Ad Writer; PPC Educate First; PPC Keyword Compiler; PPC Keyword Long-Tail Finder; PPC Keyword Scout; PPC Lead Magnet Topic Guide; PPC Negative Keyword Genius; Search Engine Use Intent; Site Link Builder for PPC; Why They Search You; Ad & Marketing Data Guru; Advertising Strategy Star; Conversion Attribution Calculator; GA4-GTM Conversion Guide; Looker Studio Trainer; Marketing Analytics Guru; Media Buying Analyst; Media Director Guru; Media Planner; Media Tracking Guide; Meta Lead Gen Guide; Paid Media Option Guide; Meta Ad Writer Pro; Social Calendar Creator; Social Media  Ad Pro; Social Media Ad Image Wiz; Social Media Video Guide; Social Post Ideator; Case Study Writer; Conversion Measurement Maven; Conversion Rate Advisor; Landing Page Analyzer; Landing Page Copy Expert; Landing Page Focus Buddy; Landing Page Quality Scorer; Landing Page Transformer; Persuasion Evaluator; Testimonial Ghoster; Web Copy: What's In it for Me?; Web Form Feedback Expert; Website Persuasion Audit; Website Conversion Tools; Revenue Profit Effect Scenario; Sales Success Coach";
@@ -324,6 +323,7 @@ RULES
 - NEVER include SEO, GEO, AEO, AIO, or AI search visibility steps. If the visitor's scenario asks for them, leave those steps out and set "alliance": true.
 - Include measurement and optimization steps ONLY if the visitor's scenario asks for them. Otherwise keep reporting limited to the final loop-back step.
 - Each step needs: a short action title (under 9 words); "why", a plain-English rationale of 1-2 sentences explaining why this step matters for revenue; 1 or 2 NuSpark solutions copied EXACTLY from the solution list; 1 to 3 AI tools copied EXACTLY from the tool list.
+- NuSpark Engage360 is the umbrella for B2C text messaging, coupons, loyalty, reviews and testimonials. When a step uses Engage360, add "platform" to that step with the one platform doing the work: "SlickText" (texts, SMS keywords, mobile coupons), "Voucherify" (loyalty, referrals, promo codes), "Birdeye" (reviews and reputation) or "Senja" (testimonials).
 - When a step uses a solution with an alliance partner, you may name the partner platform in the "why" when it helps explain the step (for example, Mobly capturing badge scans at the booth). Paul manages these alliances.
 - Write plainly and specifically, like an experienced practitioner. No hype, no exclamation points, no phrases like "it's worth noting" or "unlock".
 - Make the steps concrete to the category${state.cat==="custom" ? " and the visitor's scenario" : ""}.
@@ -349,7 +349,7 @@ AI TOOL LIST (use exact names only):
 ${TOOLS[side].join("; ")}
 
 Reply with only JSON in this shape:
-{"title":"short name for this orchestration","angle":"one sentence on the route this example takes","alliance":false,"prep":[{"title":"...","solutions":["NuSpark ..."]}],"steps":[{"n":1,"stage":"Top","timing":"Weeks 1-2","title":"...","why":"...","solutions":["NuSpark ..."],"tools":["..."]}]}
+{"title":"short name for this orchestration","angle":"one sentence on the route this example takes","alliance":false,"prep":[{"title":"...","solutions":["NuSpark ..."]}],"steps":[{"n":1,"stage":"Top","timing":"Weeks 1-2","title":"...","why":"...","solutions":["NuSpark ..."],"platform":"","tools":["..."]}]}
 "stage" is "Top", "Mid", or "Bottom". Number steps with their real position (1-12).`;
 }
 
@@ -362,6 +362,7 @@ function validate(data){
     n: Number(s.n) || i+1,
     stage: String(s.stage||""),
     timing: String(s.timing||""),
+    platform: String(s.platform||""),
     title: String(s.title||""),
     why: String(s.why||""),
     solutions: (Array.isArray(s.solutions)?s.solutions:[]).map(x=>solMap.get(String(x).toLowerCase().trim())).filter(Boolean).slice(0,2),
@@ -392,7 +393,7 @@ function drawSteps(steps){
     body.append(el("h3",null,s.title), el("p","why",s.why));
     if (s.solutions.length){
       const r = el("div","row"); r.append(el("span","k","NuSpark solution"));
-      s.solutions.forEach(([name,url])=>r.append(solNode(name,url)));
+      s.solutions.forEach(([name,url])=>r.append(solNode(name,url,s.platform)));
       body.append(r);
     }
     if (s.tools.length){
