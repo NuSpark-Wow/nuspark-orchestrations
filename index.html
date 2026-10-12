@@ -121,11 +121,11 @@ textarea{width:100%;min-height:84px;font:15px/1.5 var(--body);padding:12px;borde
     </div>
   </section>
 
-  <section class="result" id="result" aria-live="polite">
+  <section class="result" id="result" aria-live="polite" hidden>
     <div class="rhead">
-      <div class="eyebrow" id="exLabel">Sample · B2B Paid Media · Full 12</div>
-      <h2 id="rTitle">From audience to closed deal with paid media</h2>
-      <p class="angle" id="rAngle">A preview of the format. Choose your options above and select Build to generate a full orchestration.</p>
+      <div class="eyebrow" id="exLabel"></div>
+      <h2 id="rTitle"></h2>
+      <p class="angle" id="rAngle"></p>
     </div>
     <div class="prep" id="prep" hidden><span class="glabel">Before launch</span><ul id="prepList"></ul></div>
     <div class="score" id="score"></div>
@@ -439,6 +439,7 @@ async function generate(isAnother){
     $("skip").hidden = true;
     $("rTitle").textContent = String(data.title||"Your orchestration");
     $("rAngle").textContent = String(data.angle||"");
+    $("result").hidden = false;
     drawSteps(steps);
     drawPrep(data.prep, new Map(solutionsFor(state.side).map(s=>[s[0].toLowerCase(), s])));
     $("alliance").hidden = !data.alliance;
@@ -483,13 +484,6 @@ $("go").onclick = () => generate(false);
 $("another").onclick = () => generate(true);
 $("scenario").addEventListener("input", ()=>{ resetExamples(); clearClarify(); });
 
-// Preview of the format (static sample, replaced on Build)
-const S = n => SOL.find(s=>s[0]===n);
-drawSteps([
-  {n:1,stage:"Top",title:"Define target accounts and buying roles",why:"Paid media wastes money fastest when the audience is vague. Naming the accounts and roles first keeps every dollar pointed at real buyers.",solutions:[S("NuSpark GTM-Blueprint")],tools:["Buyer Persona Builder","Who's My Target"]},
-  {n:2,stage:"Top",title:"Lead with a useful guide, not a demo ask",why:"Most B2B buyers aren't ready to talk on first touch. A practical guide earns a download and a name you can nurture.",solutions:[S("NuSpark AI Lead Magnet")],tools:["Lead Magnet Type & Topic Planner","B2B eBook Topic Guide"]},
-  {n:3,stage:"Top",title:"Launch LinkedIn and syndication to the guide",why:"LinkedIn reaches the exact roles, and syndication adds pay-per-lead volume from active readers in your industry.",solutions:[S("NuSpark PlatformLeads"),S("NuSpark Content Syndication")],tools:["Social Media LI Ad Maker","Lead Magnet Ad Crafter"]}
-]);
 render();
 // tell the parent website how tall this page is, so the frame never scrolls
 function reportHeight(){ try{ parent.postMessage({nusparkHeight: document.documentElement.scrollHeight}, "*"); }catch(e){} }
